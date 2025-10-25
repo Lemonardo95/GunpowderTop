@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://fjmm6bgi32r5"]
+
+[ext_resource type="Script" uid="uid://cp6wupg2ryr2n" path="res://scripts/objs/explosive.gd" id="1_5vie8"]
+[ext_resource type="Material" uid="uid://mv7ypm3xsog8" path="res://mat/explosion.tres" id="2_lt6c2"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8rhti"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ohhpf"]
+radial_segments = 8
+rings = 0
+
+[node name="Explosive" type="StaticBody3D"]
+script = ExtResource("1_5vie8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_8rhti")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_lt6c2")
+mesh = SubResource("CylinderMesh_ohhpf")
