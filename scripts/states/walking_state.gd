@@ -1,12 +1,8 @@
 extends State
 
-func process(player, _delta):
-    var input_dir = Input.get_vector("left", "right", "up", "down")
-    var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+func process(player: Player, _delta):
+    var direction = player.get_input()
     if not direction:
         player.current_state = player.idle_state
     else:
-        if Input.is_action_just_pressed("launch"):
-            player.current_state = player.dash_state
-            return
         player.velocity = direction * player.WALK_SPEED

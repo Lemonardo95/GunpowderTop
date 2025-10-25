@@ -11,18 +11,7 @@ var flying_state = preload("res://scripts/states/flying_state.gd").new()
 var decelerating_state = preload("res://scripts/states/decelerating_state.gd").new()
 var dash_state = preload("res://scripts/states/dash_state.gd").new()
 
-var explosionMaterial = preload("res://mat/explosion.tres")
-
 var _current_state: State = idle_state
-var launchTimer: Timer = Timer.new()
-
-var overlappingBodies = {}
-
-func _ready() -> void:
-    add_child(launchTimer)
-    launchTimer.wait_time = 0.5
-    launchTimer.timeout.connect(explosionFinish)
-    launchTimer.one_shot = false
 
 var current_state: State:
     get: return _current_state
@@ -33,19 +22,9 @@ var current_state: State:
 
 func _physics_process(delta: float) -> void:
     var realDelta = TimeManager.timeMultiplier * delta
-
+    if Input.is_action_just_pressed("launch") && get_input().length() > 0:
+        current_state = dash_state
     current_state.process(self, realDelta)
-
-    if Input.is_action_just_pressed("launch") && launchTimer.is_stopped():
-        launchTimer.start()
-        mesh.material_override = explosionMaterial
-
-    if !launchTimer.is_stopped() && !overlappingBodies.is_empty():
-        for p in overlappingBodies:
-            var body: Interactable = overlappingBodies[p]
-            if body.interact(self):
-                overlappingBodies.erase(p)
-        
     
     if current_state.should_colide():
         var collision = move_and_collide(velocity * realDelta)
@@ -63,18 +42,6 @@ func _physics_process(delta: float) -> void:
         move_and_slide()
 
 
-func explosionFinish():
-    launchTimer.stop()
-    mesh.material_override = null
-
-
-func _on_explosion_col_body_entered(body: Node3D) -> void:
-    if body is Interactable:
-        overlappingBodies.set(body.get_path() , body as Interactable)
-
-
-func _on_explosion_col_body_exited(body: Node3D) -> void:
-    if body is Interactable:
-        var expl = body as Interactable
-        if expl.get_path() in overlappingBodies:
-            overlappingBodies.erase(expl.get_path())
+func get_input() -> Vector3:
+    var input_dir = Input.get_vector("left", "right", "up", "down")
+    return Vector3(input_dir.x, 0, input_dir.y).normalized()

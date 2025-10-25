@@ -5,15 +5,21 @@ const DASH_DISTANCE = 3.0
 var currentDistance = 0.0
 var lastPos: Vector3
 
+var explosionMaterial = preload("res://mat/explosion.tres")
+
+
 func enter(player: Player):
     super.enter(player)
     var input_dir = Input.get_vector("left", "right", "up", "down")
     var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
 
-    player.velocity += direction * 10
+    player.velocity = direction * (10 + player.velocity.length())
     player.look_at(player.global_position + Vector3.DOWN, player.velocity)
     currentDistance = 0.0
     lastPos = player.global_position
+
+    player.mesh.material_override = explosionMaterial
+
 
 func process(player: Player, _delta):
     currentDistance += (player.global_position - lastPos).length() 

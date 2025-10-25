@@ -11,3 +11,5 @@ func process(player, delta):
     if player.velocity.length() < 0.1:
         player.rotation_degrees = Vector3(0, player.rotation_degrees.y, 0)
         player.current_state = player.idle_state
+        player.mesh.material_override = null
+

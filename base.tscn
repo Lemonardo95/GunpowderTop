@@ -63,3 +63,9 @@ shape = SubResource("BoxShape3D_tpea4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
 mesh = SubResource("BoxMesh_42dj3")
+
+[node name="Explosive2" parent="." instance=ExtResource("4_ohhpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.471796, 1, -0.8255844)
+
+[node name="Explosive3" parent="." instance=ExtResource("4_ohhpf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4266064, 1, -0.45499325)
