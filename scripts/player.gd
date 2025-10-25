@@ -3,15 +3,13 @@ extends CharacterBody3D
 
 const WALK_SPEED = 5.0
 
-@onready var normalCollider = $NormalCol as CollisionShape3D
-@onready var flyingCollider = $FlyingCol as CollisionShape3D
 @onready var mesh = $BodyMesh as MeshInstance3D
-@onready var explosionCol = $ExplosionCol as Area3D
 
 var idle_state = preload("res://scripts/states/idle_state.gd").new()
 var walking_state = preload("res://scripts/states/walking_state.gd").new()
 var flying_state = preload("res://scripts/states/flying_state.gd").new()
 var decelerating_state = preload("res://scripts/states/decelerating_state.gd").new()
+var dash_state = preload("res://scripts/states/dash_state.gd").new()
 
 var explosionMaterial = preload("res://mat/explosion.tres")
 
@@ -52,6 +50,9 @@ func _physics_process(delta: float) -> void:
     if current_state.should_colide():
         var collision = move_and_collide(velocity * realDelta)
         if collision:
+            if collision.get_collider() is Interactable:
+                if (collision.get_collider() as Interactable).interact(self):
+                    return
             velocity = velocity.bounce(collision.get_normal())
             velocity.y = 0
             look_at(global_position + Vector3.DOWN, velocity)

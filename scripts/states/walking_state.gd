@@ -6,4 +6,7 @@ func process(player, _delta):
     if not direction:
         player.current_state = player.idle_state
     else:
+        if Input.is_action_just_pressed("launch"):
+            player.current_state = player.dash_state
+            return
         player.velocity = direction * player.WALK_SPEED

@@ -1,3 +1,4 @@
+class_name FlyingState
 extends State
 
 
@@ -7,10 +8,8 @@ var flying_time := 0.0
 func should_colide() -> bool:
     return true
 
-func enter(player):
+func enter(_player):
     flying_time = FLYING_DURATION
-    player.normalCollider.disabled = true
-    player.flyingCollider.disabled = false
 
 func process(player, delta):
     flying_time -= delta

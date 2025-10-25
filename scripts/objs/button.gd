@@ -3,6 +3,6 @@ extends Interactable
 
 @export var door: Door
 
-func interact(player: Player) -> bool:
+func interact(_player: Player) -> bool:
     door.open()
     return false

@@ -1,20 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgw6hfn0prx8i"]
+[gd_scene load_steps=5 format=3 uid="uid://dgw6hfn0prx8i"]
 
 [ext_resource type="Script" uid="uid://bee1q0p8qyorl" path="res://scripts/player.gd" id="1_4flbx"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g5ejs"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4flbx"]
 albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_rpg24"]
 material = SubResource("StandardMaterial3D_4flbx")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
-radius = 1.00307
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_4flbx"]
-radius = 1.30371
+height = 1.0
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 4
@@ -24,19 +19,7 @@ axis_lock_angular_z = true
 script = ExtResource("1_4flbx")
 
 [node name="NormalCol" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_g5ejs")
+shape = SubResource("SphereShape3D_4flbx")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_rpg24")
-
-[node name="FlyingCol" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_4flbx")
-disabled = true
-
-[node name="ExplosionCol" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionCol"]
-shape = SubResource("CylinderShape3D_4flbx")
-
-[connection signal="body_entered" from="ExplosionCol" to="." method="_on_explosion_col_body_entered"]
-[connection signal="body_exited" from="ExplosionCol" to="." method="_on_explosion_col_body_exited"]
