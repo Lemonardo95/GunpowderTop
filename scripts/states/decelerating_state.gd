@@ -2,7 +2,7 @@ extends State
 
 const DECELERATION_RATE = 50
 
-func should_colide() -> bool:
+func should_collide() -> bool:
     return true
 
 

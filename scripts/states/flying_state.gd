@@ -5,7 +5,7 @@ extends State
 const FLYING_DURATION = 1.0 # seconds
 var flying_time := 0.0
 
-func should_colide() -> bool:
+func should_collide() -> bool:
     return true
 
 func enter(_player):

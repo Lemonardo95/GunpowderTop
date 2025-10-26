@@ -23,3 +23,5 @@ shape = SubResource("SphereShape3D_4flbx")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_rpg24")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]

@@ -26,13 +26,13 @@ var current_state: State:
 func _physics_process(delta: float) -> void:
     var realDelta = TimeManager.timeMultiplier * delta
     if Input.is_action_just_pressed("launch"):
-        if current_state.should_colide():
+        if current_state.should_collide():
             current_bounce_time = BOUNCE_TIME
         elif get_input().length() > 0:
             current_state = dash_state
     current_state.process(self, realDelta)
     
-    if current_state.should_colide():
+    if current_state.should_collide():
         var collision = move_and_collide(velocity * realDelta)
         if collision:
             if collision.get_collider() is Interactable:

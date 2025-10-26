@@ -4,7 +4,7 @@ extends Resource
 func enter(_player):
     pass
 
-func should_colide() -> bool:
+func should_collide() -> bool:
     return false
 
 func process(_player, _delta):
