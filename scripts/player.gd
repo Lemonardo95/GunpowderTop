@@ -10,8 +10,11 @@ var walking_state = preload("res://scripts/states/walking_state.gd").new()
 var flying_state = preload("res://scripts/states/flying_state.gd").new()
 var decelerating_state = preload("res://scripts/states/decelerating_state.gd").new()
 var dash_state = preload("res://scripts/states/dash_state.gd").new()
+var bounce_state = preload("res://scripts/states/bounce_state.gd").new()
 
 var _current_state: State = idle_state
+var current_bounce_time = 0.0
+const BOUNCE_TIME = 0.5
 
 var current_state: State:
     get: return _current_state
@@ -22,8 +25,11 @@ var current_state: State:
 
 func _physics_process(delta: float) -> void:
     var realDelta = TimeManager.timeMultiplier * delta
-    if Input.is_action_just_pressed("launch") && get_input().length() > 0:
-        current_state = dash_state
+    if Input.is_action_just_pressed("launch"):
+        if current_state.should_colide():
+            current_bounce_time = BOUNCE_TIME
+        elif get_input().length() > 0:
+            current_state = dash_state
     current_state.process(self, realDelta)
     
     if current_state.should_colide():
@@ -35,11 +41,16 @@ func _physics_process(delta: float) -> void:
             velocity = velocity.bounce(collision.get_normal())
             velocity.y = 0
             look_at(global_position + Vector3.DOWN, velocity)
-
+            if current_bounce_time > 0:
+                current_state = bounce_state
+                
     else:
         # If not colliding, just move the player
         velocity = TimeManager.timeMultiplier * velocity
         move_and_slide()
+
+    if current_bounce_time > 0:
+        current_bounce_time -= delta
 
 
 func get_input() -> Vector3:
