@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgw6hfn0prx8i"]
+[gd_scene load_steps=8 format=3 uid="uid://dgw6hfn0prx8i"]
 
 [ext_resource type="Script" uid="uid://bee1q0p8qyorl" path="res://scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://c25wnq42i4hkp" path="res://tex/Circle.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://b772tg2omaq8i" path="res://tex/Arrow.png" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://dvrirywn0qw8t" path="res://scripts/arrow.gd" id="3_sweqy"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4flbx"]
 
@@ -24,4 +27,16 @@ shape = SubResource("SphereShape3D_4flbx")
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_rpg24")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Arrow" type="Node3D" parent="."]
+visible = false
+script = ExtResource("3_sweqy")
+
+[node name="Arrow" type="Sprite3D" parent="Arrow"]
+transform = Transform3D(-3.1035086e-08, 0.268, -5.7436765e-08, 0, -1.1714652e-08, -1.314, -0.71, -1.1714652e-08, 2.5106408e-15, 0, 0, 0)
+offset = Vector2(128, 0)
+modulate = Color(0.02745098, 1, 0, 1)
+texture = ExtResource("3_hqtel")
+
+[node name="Circle" type="Sprite3D" parent="Arrow/Arrow"]
+transform = Transform3D(0.8943662, 0, 0, 0, 2.369403, -7.1054274e-15, 0, 3.5527137e-15, 0.48325723, 0, 0, 0)
+texture = ExtResource("2_i3pqv")

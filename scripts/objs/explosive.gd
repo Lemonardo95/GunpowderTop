@@ -6,8 +6,7 @@ func interact(player: Player) -> bool:
 
     var direction = (player.global_position - global_position).normalized()
 
-    player.velocity = direction * (50 + player.velocity.length()) 
-    player.look_at(player.global_position + Vector3.DOWN, player.velocity)
+    player.aVelocity = direction * (50 + player.aVelocity.length()) 
 
     queue_free()
     TimeManager.slowTime()

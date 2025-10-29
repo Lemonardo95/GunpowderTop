@@ -5,4 +5,4 @@ func process(player: Player, _delta):
     if not direction:
         player.current_state = player.idle_state
     else:
-        player.velocity = direction * player.WALK_SPEED
+        player.aVelocity = direction * player.WALK_SPEED

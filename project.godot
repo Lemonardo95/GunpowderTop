@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TimeManager="*res://scripts/time_manager.gd"
+MouseWorldPos="*res://scripts/mouse_world_pos.gd"
 
 [input]
 

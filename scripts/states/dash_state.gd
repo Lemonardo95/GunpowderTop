@@ -10,11 +10,9 @@ var explosionMaterial = preload("res://mat/explosion.tres")
 
 func enter(player: Player):
     super.enter(player)
-    var input_dir = Input.get_vector("left", "right", "up", "down")
-    var direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+    var direction = player.get_input()
 
-    player.velocity = direction * (10 + player.velocity.length())
-    player.look_at(player.global_position + Vector3.DOWN, player.velocity)
+    player.aVelocity = direction * (10 + player.aVelocity.length())
     currentDistance = 0.0
     lastPos = player.global_position
 

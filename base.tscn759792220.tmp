@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://c1elhqitxobsg"]
 
-[ext_resource type="Script" uid="uid://hxy5hlqpfvkd" path="res://scripts/GM.gd" id="1_42dj3"]
+[ext_resource type="Script" path="res://scripts/input_manager.gd" id="1_42dj3"]
 [ext_resource type="PackedScene" uid="uid://dc5ep2mtic88n" path="res://world/demo.blend" id="1_rpg24"]
 [ext_resource type="PackedScene" uid="uid://dgw6hfn0prx8i" path="res://player.tscn" id="2_3vi8l"]
 [ext_resource type="Script" uid="uid://c2fjtuncfjw3o" path="res://scripts/camera_3d.gd" id="3_8rhti"]
@@ -71,5 +71,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.471796, 1, -0.8255844)
 
 [node name="Explosive3" parent="." instance=ExtResource("4_ohhpf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4266064, 1, -0.45499325)
-
-[node name="RayCast3D" type="RayCast3D" parent="."]

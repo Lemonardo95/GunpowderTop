@@ -5,13 +5,20 @@ var timer = 0.0
 
 const CHOICE_TIME = 1.0
 
-func enter(player: Player):
-    enterVelocity = player.velocity
-    timer = CHOICE_TIME
-    player.velocity = Vector3()
+var arrow: Arrow
 
-func process(player, delta):
+func enter(player: Player):
+    enterVelocity = player.aVelocity
+    timer = CHOICE_TIME
+    player.aVelocity = Vector3()
+    arrow = player.get_node("Arrow")
+    arrow.visible = true
+
+func process(player: Player, delta):
     timer -= delta
     if timer <= 0.0:
-        player.velocity = enterVelocity
+        var dir = (arrow.to_global(Vector3.FORWARD) - arrow.global_position).normalized()
+        dir.y = 0
+        player.aVelocity = enterVelocity.length() * dir
         player.current_state = player.flying_state
+        arrow.visible = false

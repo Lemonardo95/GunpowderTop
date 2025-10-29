@@ -16,9 +16,12 @@ var _current_state: State = idle_state
 var current_bounce_time = 0.0
 const BOUNCE_TIME = 0.5
 
+var aVelocity = Vector3()
+
 var current_state: State:
     get: return _current_state
     set(value):
+        print(value.get_class())
         _current_state = value
         if _current_state:
             _current_state.enter(self)
@@ -33,20 +36,19 @@ func _physics_process(delta: float) -> void:
     current_state.process(self, realDelta)
     
     if current_state.should_collide():
-        var collision = move_and_collide(velocity * realDelta)
+        var collision = move_and_collide(aVelocity * realDelta)
         if collision:
             if collision.get_collider() is Interactable:
                 if (collision.get_collider() as Interactable).interact(self):
                     return
-            velocity = velocity.bounce(collision.get_normal())
-            velocity.y = 0
-            look_at(global_position + Vector3.DOWN, velocity)
+            aVelocity = aVelocity.bounce(collision.get_normal())
+            aVelocity.y = 0
             if current_bounce_time > 0:
                 current_state = bounce_state
                 
     else:
         # If not colliding, just move the player
-        velocity = TimeManager.timeMultiplier * velocity
+        velocity = TimeManager.timeMultiplier * aVelocity
         move_and_slide()
 
     if current_bounce_time > 0:

@@ -7,8 +7,8 @@ func should_collide() -> bool:
 
 
 func process(player, delta):
-    player.velocity = player.velocity.move_toward(Vector3.ZERO, DECELERATION_RATE * delta)
-    if player.velocity.length() < 0.1:
+    player.aVelocity = player.aVelocity.move_toward(Vector3.ZERO, DECELERATION_RATE * delta)
+    if player.aVelocity.length() < 0.1:
         player.rotation_degrees = Vector3(0, player.rotation_degrees.y, 0)
         player.current_state = player.idle_state
         player.mesh.material_override = null
