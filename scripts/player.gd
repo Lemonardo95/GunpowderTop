@@ -21,10 +21,10 @@ var aVelocity = Vector3()
 var current_state: State:
     get: return _current_state
     set(value):
-        print(value.get_class())
-        _current_state = value
-        if _current_state:
-            _current_state.enter(self)
+        if _current_state != value:
+            _current_state = value
+            if _current_state:
+                _current_state.enter(self)
 
 func _physics_process(delta: float) -> void:
     var realDelta = TimeManager.timeMultiplier * delta
@@ -38,14 +38,14 @@ func _physics_process(delta: float) -> void:
     if current_state.should_collide():
         var collision = move_and_collide(aVelocity * realDelta)
         if collision:
+            if current_bounce_time > 0:
+                current_state = bounce_state
             if collision.get_collider() is Interactable:
                 if (collision.get_collider() as Interactable).interact(self):
                     return
             aVelocity = aVelocity.bounce(collision.get_normal())
             aVelocity.y = 0
-            if current_bounce_time > 0:
-                current_state = bounce_state
-                
+
     else:
         # If not colliding, just move the player
         velocity = TimeManager.timeMultiplier * aVelocity

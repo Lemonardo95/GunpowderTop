@@ -11,10 +11,10 @@
 [sub_resource type="Environment" id="Environment_3vi8l"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ohhpf"]
-size = Vector3(1, 2, 1)
+size = Vector3(1, 2, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_21bcp"]
-size = Vector3(1, 2, 1)
+size = Vector3(1, 2, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tpea4"]
 size = Vector3(0.1, 0.2, 0.2)
@@ -42,10 +42,10 @@ script = ExtResource("3_8rhti")
 targetPlayer = NodePath("../Player")
 
 [node name="Explosive" parent="." instance=ExtResource("4_ohhpf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2464104, 1, -7.152151)
 
 [node name="Door" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4.138)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5739707, 1, 9.765718)
 script = ExtResource("5_21bcp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
@@ -56,7 +56,7 @@ skeleton = NodePath("../..")
 shape = SubResource("BoxShape3D_21bcp")
 
 [node name="Button" type="StaticBody3D" parent="." node_paths=PackedStringArray("door")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9601127, 1.1591088, 2.6482003)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9667169, 1.1591088, 6.6601057)
 script = ExtResource("6_tpea4")
 door = NodePath("../Door")
 

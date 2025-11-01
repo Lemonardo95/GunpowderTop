@@ -1,5 +1,5 @@
 {
-    "godotTools.editorPath.godot4": "c:\\Program Files (x86)\\Godot\\Godot_v4.5.1-stable_win64.exe",
+    "godotTools.editorPath.godot4": "d:\\Dev Programs\\Godot_v4.5.1-stable_win64.exe",
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
